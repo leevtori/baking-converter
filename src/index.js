@@ -1,7 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-// import App from './App';
 import * as serviceWorker from './serviceWorker';
 
 
@@ -10,22 +9,20 @@ function calculateConversion(number, unit) {
   const tbspToGram = {gram: 15}
 
   const output = []
-  while (output === 0) {
-    if (unit === 'cup'){
-      const tbsp = cupToTbsp.tbsp
-      const gram = tbsp * tbspToGram.gram
-      output.push({gram: 1*number, tbsp: tbsp*number, gram:  gram*number});
-    }
-    else if (unit === 'tbsp'){
-      const cup = 1/cupToTbsp.tbsp
-      const gram = tbspToGram.gram
-      output.push({tbsp:1*number, cup: cup*number, gram: gram*number})
-    }
-    else {
-      const tbsp = 1/tbspToGram.gram
-      const cup = tbsp * 1/cupToTbsp.tbsp
-      output.push({gram: 1*number, tbsp: tbsp*number, cup: cup*number})
-    }
+  if (unit === 'cup'){
+    const tbsp = cupToTbsp.tbsp
+    const gram = tbsp * tbspToGram.gram
+    output.push({cup: 1*number, tbsp: tbsp*number, gram:  gram*number});
+  }
+  else if (unit === 'tbsp'){
+    const cup = 1/cupToTbsp.tbsp
+    const gram = tbspToGram.gram
+    output.push({tbsp:1*number, cup: cup*number, gram: gram*number})
+  }
+  else {
+    const tbsp = 1/tbspToGram.gram
+    const cup = tbsp * 1/cupToTbsp.tbsp
+    output.push({gram: 1*number, tbsp: tbsp*number, cup: cup*number})
   }
   return output
 }
@@ -34,25 +31,31 @@ class OutputConversions extends React.Component {
   render(){
     const convertNumber = this.props.convertNumber;
     const convertMeasurement = this.props.convertMeasurement;
+    const output = calculateConversion(convertNumber, convertMeasurement)
 
-    const output = []
-    this.props.conversions.forEach((conversion) => {    
-      if (conversion.unit === convertMeasurement){
-        output.push(conversion);
-      }
-    });
     debugger;
-    let cup = (output[0].cup * convertNumber);
-    let gram = (output[0].gram * convertNumber);
-    let tbsp = (output[0].tbsp * convertNumber);
-
-    return(
-      <div id="outputMeasurements">
-        <input type='text' id='cup' value={cup || 0} readOnly></input> cup
-        <input type='text' id='grams' value={gram || 0} readOnly></input> grams
-        <input type='text' id='tablespoon' value={tbsp || 0} readOnly></input> tbsps
-      </div>
-    );
+    if (output.length === 0) {
+      return(
+        <div id="outputMeasurements">
+          <input type='text' id='cup' value={0} readOnly></input> cup
+          <input type='text' id='grams' value={0} readOnly></input> grams
+          <input type='text' id='tablespoon' value={0} readOnly></input> tbsps
+        </div>
+      );
+    }
+    else {
+      let cup = (output[0].cup );
+      let gram = (output[0].gram );
+      let tbsp = (output[0].tbsp );
+  
+      return(
+        <div id="outputMeasurements">
+          <input type='text' id='cup' value={cup || 0} readOnly></input> cup
+          <input type='text' id='grams' value={gram || 0} readOnly></input> grams
+          <input type='text' id='tablespoon' value={tbsp || 0} readOnly></input> tbsps
+        </div>
+      );
+    }
   }
 }
 
@@ -133,24 +136,18 @@ class ConverterTable extends React.Component {
         onConvertMeasurementChange={this.handleConverMeasurementChange}/>
         <OutputConversions
         convertNumber={this.state.convertNumber}
-        convertMeasurement={this.state.convertMeasurement}
-        conversions ={this.props.conversions}/>
+        convertMeasurement={this.state.convertMeasurement}/>
       </div>
     );
   }
 }
-// cup to tbsp, gram tbsp
-// const CONVERSIONS = [{unit: 'cup', tbsp:16}, {unit:'tbsp', gram:15}]
-const CONVERSIONS = [{unit:'cup', cup:1, gram:128, tbsp:16}, {unit:'gram', cup: 0.0078125, gram:1, tbsp:0.125}, {unit:'tbsp', cup: 0.0625, gram:15, tbsp:1}]
 
 ReactDOM.render(
   <React.StrictMode>
-   <ConverterTable conversions={CONVERSIONS}></ConverterTable>
+   <ConverterTable></ConverterTable>
   </React.StrictMode>,
   document.getElementById('root')
 );
-
-// <App />
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.
