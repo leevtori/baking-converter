@@ -37,9 +37,15 @@ class OutputConversions extends React.Component {
     if (output.length === 0) {
       return(
         <div id="outputMeasurements">
-          <input type='text' id='cup' value={0} readOnly></input> cup
-          <input type='text' id='grams' value={0} readOnly></input> grams
-          <input type='text' id='tablespoon' value={0} readOnly></input> tbsps
+          <div class="input"> 
+            <input type='text' id='cup' value={0} readOnly></input> cup
+          </div>
+          <div class="input"> 
+            <input type='text' id='grams' value={0} readOnly></input> grams
+          </div>
+          <div class="input"> 
+            <input type='text' id='tablespoon' value={0} readOnly></input> tbsps
+          </div>
         </div>
       );
     }
@@ -50,9 +56,15 @@ class OutputConversions extends React.Component {
   
       return(
         <div id="outputMeasurements">
-          <input type='text' id='cup' value={cup || 0} readOnly></input> cup
-          <input type='text' id='grams' value={gram || 0} readOnly></input> grams
-          <input type='text' id='tablespoon' value={tbsp || 0} readOnly></input> tbsps
+          <div class="input"> 
+            <input type='text' id='cup' value={cup || 0} readOnly></input> cup
+          </div>
+          <div class="input"> 
+            <input type='text' id='grams' value={gram || 0} readOnly></input> grams
+          </div>
+          <div class="input"> 
+            <input type='text' id='tablespoon' value={tbsp || 0} readOnly></input> tbsps
+          </div>
         </div>
       );
     }
@@ -125,10 +137,11 @@ class ConverterTable extends React.Component {
   
   render() {
     return (
-      <div>
-        <h1>All Purpose Measurements</h1>
-        <p>Ever need to switch in between measurements and you 
-          just don't know the conversion? Well never again!</p>
+    <div>
+      <h1>All Purpose Measurements</h1>
+      <p>Ever need to switch in between measurements and you 
+        just don't know the conversion? Well never again!</p>
+      <div class="displayData">
         <SearchBar
         convertNumber={this.state.convertNumber}
         onConvertNumberChange={this.handleConvertNumberChange}
@@ -138,6 +151,7 @@ class ConverterTable extends React.Component {
         convertNumber={this.state.convertNumber}
         convertMeasurement={this.state.convertMeasurement}/>
       </div>
+    </div>
     );
   }
 }

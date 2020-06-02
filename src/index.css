@@ -2,29 +2,14 @@ body{
     text-align: center;
 }
 
-/* #displayData{
-    column-count: 3;
-    column-gap: 40px;
-    column-fill: auto;
-
-} */
-/* 
-#inputData{
-    width: 33%;
-    height: 100%;
-    float: left;
-
+.input{
+    display: block;
 }
 
-#measurements{
-    height: 100%;
-    float: left;
-}*/
+.displayData {
+    display:flex;
+    flex-direction: row;
+    width: 30%;
+    margin: auto;
+}
 
-/* input[type=text], select{
-    display: inline;
-}  */
-
-/* #outputMeasurements{
-    display:block;
-} */
