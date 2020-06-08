@@ -1,1 +1,0 @@
-{"version":3,"sources":["index.css"],"names":[],"mappings":"AAAA,KACI,iBACJ,CAEA,OACI,aACJ,CAEA,aACI,YAAY,CACZ,kBAAmB,CACnB,SAAU,CACV,WACJ","file":"main.34cae7ce.chunk.css","sourcesContent":["body{\n    text-align: center;\n}\n\n.input{\n    display: block;\n}\n\n.displayData {\n    display:flex;\n    flex-direction: row;\n    width: 30%;\n    margin: auto;\n}\n\n"]}

@@ -1,8 +1,8 @@
-import React from 'react';
+import React, { useLayoutEffect } from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import * as serviceWorker from './serviceWorker';
-
+import { Helmet } from 'react-helmet';
 
 function calculateConversion(number, unit) {
   const cupToTbsp = {tbsp:16}
@@ -139,17 +139,25 @@ class ConverterTable extends React.Component {
     return (
     <div>
       <h1>All Purpose Measurements</h1>
-      <p>Ever need to switch in between measurements and you 
-        just don't know the conversion? Well never again!</p>
-      <div class="displayData">
-        <SearchBar
-        convertNumber={this.state.convertNumber}
-        onConvertNumberChange={this.handleConvertNumberChange}
-        convertMeasurement={this.state.convertMeasurement}
-        onConvertMeasurementChange={this.handleConverMeasurementChange}/>
-        <OutputConversions
-        convertNumber={this.state.convertNumber}
-        convertMeasurement={this.state.convertMeasurement}/>
+      <h3>Ever need to switch in between measurements and you 
+        just don't know the conversion? <br/>Well never again!</h3>
+      <br/>
+      <div class="container">
+        <div class="displayData">
+          <SearchBar
+          convertNumber={this.state.convertNumber}
+          onConvertNumberChange={this.handleConvertNumberChange}
+          convertMeasurement={this.state.convertMeasurement}
+          onConvertMeasurementChange={this.handleConverMeasurementChange}/>
+          <OutputConversions
+          convertNumber={this.state.convertNumber}
+          convertMeasurement={this.state.convertMeasurement}/>
+        </div>
+
+      </div>
+
+      <div class="footer">
+        <p>Check out the source code <a href="https://github.com/leevtori/baking-converter.git">here</a></p>
       </div>
     </div>
     );
@@ -158,6 +166,11 @@ class ConverterTable extends React.Component {
 
 ReactDOM.render(
   <React.StrictMode>
+    <Helmet>
+      <title>All Purpose Measurements</title>
+      <meta charset="utf-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    </Helmet>
    <ConverterTable></ConverterTable>
   </React.StrictMode>,
   document.getElementById('root')
